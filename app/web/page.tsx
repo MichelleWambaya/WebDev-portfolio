@@ -140,21 +140,7 @@ export default function WebPage() {
 			<section className="relative min-h-[70dvh] grid place-items-center overflow-hidden">
 				<video src="/19784309-uhd_2160_3836_24fps.mp4" className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline />
 				<div className="absolute inset-0 bg-black/55" />
-				{/* floating code fragments */}
-				<div className="absolute inset-0 -z-0 pointer-events-none">
-					{fragments.map((f) => (
-						<motion.span
-							key={f.id}
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 0.35, y: -40 }}
-							transition={{ duration: 6, delay: f.delay, repeat: Infinity, repeatType: "reverse" }}
-							className="absolute text-xs text-white/60"
-							style={{ left: `${f.x}%`, top: `${(f.id * 13) % 100}%` }}
-						>
-							{f.text}
-						</motion.span>
-					))}
-				</div>
+
 				<motion.div style={{ y }} className="absolute inset-0 -z-10" />
 				<div className="text-center relative z-10">
 					<h2 className="text-4xl">Enter the Code Realm</h2>
