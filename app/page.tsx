@@ -7,7 +7,7 @@ import { Card } from "@/components/Card";
 import { Modal } from "@/components/Modal";
 
 export default function Home() {
-	const [openId, setOpenId] = useState(null);
+	const [openId, setOpenId] = useState<number | null>(null);
 
 	const projects = [
 		{
@@ -46,6 +46,7 @@ export default function Home() {
 		<PageTransition>
 			{/* Hero Section */}
 			<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+				{/* Base sharp background video */}
 				<video 
 					autoPlay 
 					muted 
@@ -55,6 +56,24 @@ export default function Home() {
 				>
 					<source src="\2792370-hd_1920_1080_30fps.mp4" type="video/mp4" />
 				</video>
+
+				{/* Blurred sides overlay using mask so center stays sharp */}
+				<video 
+					autoPlay 
+					muted 
+					loop 
+					playsInline
+					className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl"
+					style={{
+						WebkitMaskImage:
+							'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 92%, rgba(0,0,0,1) 100%)',
+						maskImage:
+							'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 92%, rgba(0,0,0,1) 100%)',
+					}}
+				>
+					<source src="/19784309-uhd_2160_3836_24fps.mp4" type="video/mp4" />
+				</video>
+
 				<div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
 				
 				<div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
@@ -128,20 +147,37 @@ export default function Home() {
 								<span className="bg-dusk/20 border border-dusk/30 px-4 py-2 text-sm text-dusk">REST API</span>
 							</div>
 						</div>
-						<div className="relative">
-						<div className="max-w-4xl mx-auto">
-						<div className="bg-black/50 rounded-lg overflow-hidden border border-dusk/30">
+						<div className="relative min-h-[24rem] rounded-lg overflow-hidden border border-dusk/30">
+							{/* Blurred side background */}
+							<video
+								autoPlay
+								muted
+								loop
+								playsInline
+								className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl"
+								style={{
+									WebkitMaskImage:
+										'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 92%, rgba(0,0,0,1) 100%)',
+									maskImage:
+										'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 92%, rgba(0,0,0,1) 100%)',
+								}}
+							>
+								<source src="/video2.mp4" type="video/mp4" />
+							</video>
+
+							{/* Center sharp video */}
+							<div className="relative z-10 flex justify-center items-center h-full p-4">
 							<video
 								controls
-								className="w-full h-auto"
-								poster="/portrait_primary.jpg"
-							>
-								<source src="/Untitled video - Made with Clipchamp (2) (1).mp4" type="video/mp4" />
-								Your browser does not support the video tag.
+								className="w-full max-w-md md:max-w-lg lg:max-w-xl h-auto rounded-lg shadow-2xl"
+								style={{ objectFit: 'contain' }}
+								>
+								<source src="/video2.mp4" type="video/mp4" />
 							</video>
+							</div>
+
+							<div className="absolute inset-0 bg-gradient-to-t from-dusk/30 via-transparent to-transparent" />
 						</div>
-						</div>
-					</div>
 				</div>
 				</div>
 			</section>
@@ -156,7 +192,7 @@ export default function Home() {
 					
 					<div className="grid md:grid-cols-2 gap-8">
 						{projects.map((project) => (
-							<Card key={project.id} project={project} onClick={() => setOpenId(project.id)} />
+							<Card key={project.id} project={project} onClick={() => setOpenId(project.id as number)} />
 						))}
 					</div>
 				</div>

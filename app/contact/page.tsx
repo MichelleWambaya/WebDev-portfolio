@@ -6,20 +6,27 @@ import { PageTransition } from "@/components/PageTransition";
 import { generateResumePDF } from "@/components/ResumeGenerator";
 
 export default function Contact() {
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<{
+		name: string;
+		email: string;
+		company: string;
+		message: string;
+	}>({
 		name: "",
 		email: "",
 		company: "",
 		message: ""
 	});
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		// Handle form submission
 		console.log("Form submitted:", formData);
 	};
 
-	const handleChange = (e) => {
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value
